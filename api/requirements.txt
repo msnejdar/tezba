@@ -1,1 +1,2 @@
-tika==2.6.0
+# No dependencies for now - testing basic functionality first
+# tika==2.6.0  # Will be added back once basic API works
