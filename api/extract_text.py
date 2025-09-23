@@ -112,6 +112,14 @@ def handler(request):
             })
             
         except Exception as serverless_error:
+            # Check if it's a format not supported error
+            error_msg = str(serverless_error)
+            if "not supported" in error_msg.lower() or "unsupported" in error_msg.lower():
+                return _json_response(request, {
+                    "success": False,
+                    "error": error_msg,
+                    "supportedFormats": [".pdf", ".docx", ".txt", ".md", ".html", ".htm", ".rtf", ".py", ".js", ".css", ".json", ".xml", ".csv"]
+                }, 400)
             # Fallback to remote Tika server if serverless fails
             tika_url = os.environ.get('TIKA_SERVER_URL')
             if not tika_url:

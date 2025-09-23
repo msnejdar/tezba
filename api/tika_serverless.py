@@ -228,12 +228,13 @@ def extract_text_serverless(file_data: bytes, filename: str) -> tuple[str, dict]
         return extract_text_html(file_data)
     elif file_ext == '.rtf':
         return extract_text_rtf(file_data)
+    elif file_ext == '.pages':
+        # Apple Pages format is not supported in serverless mode
+        raise Exception("Apple Pages (.pages) format is not supported. Please export your document to PDF or DOCX format.")
     else:
-        # For unknown formats, try text extraction as fallback
-        try:
-            return extract_text_txt(file_data)
-        except:
-            raise Exception(f"Unsupported file format: {file_ext}")
+        # List supported formats in error message
+        supported_formats = ['.pdf', '.docx', '.txt', '.md', '.html', '.htm', '.rtf', '.py', '.js', '.css', '.json', '.xml', '.csv']
+        raise Exception(f"Unsupported file format: {file_ext}. Supported formats: {', '.join(supported_formats)}")
 
 def handler(request):
     """Main handler for serverless text extraction"""
