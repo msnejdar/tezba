@@ -1,20 +1,13 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "claude-flow/intelligent-searcher/client/package.json",
-      "use": "@vercel/static-build"
-    }
-  ],
+  "buildCommand": "cd claude-flow/intelligent-searcher/client && npm install && npm run build",
+  "outputDirectory": "claude-flow/intelligent-searcher/client/build",
+  "framework": "create-react-app",
   "routes": [
-    { "src": "/static/(.*)", "dest": "/static/$1" },
-    { "src": "/favicon.ico", "dest": "/favicon.ico" },
-    { "src": "/asset-manifest.json", "dest": "/asset-manifest.json" },
-    { "src": "/manifest.json", "dest": "/manifest.json" },
-    { "src": "/robots.txt", "dest": "/robots.txt" },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "src": "/[^.]+",
+      "dest": "/",
+      "status": 200
     }
   ]
 }
