@@ -41,7 +41,7 @@ const HiveMindDashboard = () => {
     }
 
     return () => stopMonitoring();
-  }, [selectedHive]);
+  }, [selectedHive, startMonitoring, stopMonitoring]);
 
   const loadHiveMinds = async () => {
     try {
