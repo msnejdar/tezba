@@ -1,0 +1,141 @@
+TESTOVACÍ DOKUMENT - ČESKÁ VERZE
+================================
+
+Smlouva o poskytování služeb č. SM-2024-001
+Datum uzavření: 15. března 2024
+
+SMLUVNÍ STRANY:
+===============
+
+Poskytovatel:
+Firma ABC s.r.o.
+IČO: 12345678
+Sídlo: Václavské náměstí 123, 110 00 Praha 1
+Zastoupena: Jan Novák, jednatel
+Rodné číslo: 750815/1234
+Telefon: +420 234 567 890
+E-mail: jan.novak@abc.cz
+
+Odběratel:
+Společnost XYZ a.s.
+IČO: 87654321
+DIČ: CZ87654321
+Sídlo: Náměstí Míru 456, 120 00 Praha 2
+Zastoupena: Marie Svobodová, ředitelka
+Rodné číslo: 825203/5678
+Telefon: 602 123 456
+E-mail: marie.svobodova@xyz.cz
+
+PŘEDMĚT SMLOUVY:
+================
+
+1. Poskytovatel se zavazuje poskytovat odběrateli následující služby:
+   - Konzultační služby v oblasti IT
+   - Vývoj softwarových aplikací
+   - Technická podpora systémů
+
+2. Rozsah služeb je specifikován v příloze č. 1 této smlouvy.
+
+3. Služby budou poskytovány v sídle odběratele nebo vzdáleně dle dohody.
+
+FINANČNÍ PODMÍNKY:
+==================
+
+Celková cena za poskytované služby: 850 000 Kč bez DPH
+DPH 21%: 178 500 Kč
+Celkem včetně DPH: 1 028 500 Kč
+
+Platební podmínky:
+- Platba na základě měsíčních faktur
+- Splatnost faktury: 30 dnů od doručení
+- Bankovní spojení: 1234567890/0100
+
+KONTAKTNÍ OSOBY:
+================
+
+Za poskytovatele:
+Petr Dvořák
+Projektový manažer
+Telefon: +420 775 123 456
+E-mail: petr.dvorak@abc.cz
+Rodné číslo: 690420/9876
+
+Za odběratele:
+Ing. Tomáš Procházka, Ph.D.
+Vedoucí IT oddělení
+Telefon: 608 987 654
+E-mail: tomas.prochazka@xyz.cz
+Rodné číslo: 801125/3456
+
+DODATEČNÉ INFORMACE:
+====================
+
+Reference na související dokumenty:
+- Nabídka č. NAB-2024-015 ze dne 1. února 2024
+- Technická specifikace TS-2024-007
+- Bezpečnostní protokol BP-2024-003
+
+Důležité termíny:
+- Zahájení prací: 1. dubna 2024
+- Průběžná kontrola: 15. června 2024
+- Dokončení projektu: 30. září 2024
+
+Ostatní telefonní čísla:
+- Recepce ABC: 234567111
+- Pohotovost IT: +420 775 999 888
+- Zákaznická linka: 800 123 456
+
+Další osoby podílející se na projektu:
+- Jiří Krejčí (vývojář) - RČ: 851010/7890, tel: 777 444 555
+- Anna Nováková (analytička) - RČ: 795512/1122, tel: +420 606 333 222
+- Pavel Černý (tester) - RČ: 720830/4455, tel: 603 777 999
+
+POZNÁMKY:
+=========
+
+Tato smlouva byla uzavřena v souladu s obchodním zákoníkem a zákonem o ochraně osobních údajů.
+
+Veškeré spory budou řešeny u Městského soudu v Praze.
+
+Smlouva nabývá účinnosti dnem podpisu obou smluvních stran.
+
+Praha, 15. března 2024
+
+_____________________        _____________________
+Jan Novák                   Marie Svobodová
+jednatel ABC s.r.o.         ředitelka XYZ a.s.
+
+---
+
+PŘÍLOHA Č. 1: SPECIFIKACE SLUŽEB
+=================================
+
+Detailní popis poskytovaných služeb:
+
+1. KONZULTAČNÍ SLUŽBY
+   - Analýza současného stavu IT infrastruktury
+   - Návrh optimalizačních opatření
+   - Školení zaměstnanců
+   Časový rozsah: 40 hodin
+   Sazba: 1 500 Kč/hod
+
+2. VÝVOJ SOFTWARE
+   - Webová aplikace pro správu dokumentů
+   - Mobilní aplikace pro Android/iOS
+   - Integrace s existujícími systémy
+   Odhadovaný rozsah: 200 člověkohodin
+   Sazba: 2 000 Kč/hod
+
+3. TECHNICKÁ PODPORA
+   - Monitoring systémů 24/7
+   - Řešení incidentů
+   - Pravidelné aktualizace
+   Měsíční paušál: 25 000 Kč
+
+KONTAKT PRO TECHNICKÉ DOTAZY:
+support@abc.cz
+Telefon podpory: +420 234 567 800
+
+Odpovědná osoba: Ing. Lukáš Svoboda
+RČ: 761205/6789
+Mobil: 721 555 333

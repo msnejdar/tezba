@@ -1,0 +1,180 @@
+SERVICE AGREEMENT - ENGLISH VERSION
+====================================
+
+Service Agreement No. SA-2024-001
+Date of execution: March 15, 2024
+
+CONTRACTING PARTIES:
+====================
+
+Service Provider:
+TechCorp Solutions Inc.
+Registration No: 98765432
+Address: 123 Innovation Drive, Suite 100, San Francisco, CA 94105
+Represented by: John Smith, CEO
+Social Security Number: 123-45-6789
+Phone: +1 (415) 555-0123
+Email: john.smith@techcorp.com
+
+Client:
+Global Enterprises Ltd.
+Company ID: 87654321
+Tax ID: US87654321
+Address: 456 Business Boulevard, New York, NY 10001
+Represented by: Sarah Johnson, CTO
+Social Security Number: 987-65-4321
+Phone: +1 (212) 555-0456
+Email: sarah.johnson@globalent.com
+
+SCOPE OF SERVICES:
+==================
+
+1. The Provider agrees to deliver the following services to the Client:
+   - IT consulting and strategic planning
+   - Software development and implementation
+   - Technical support and maintenance
+   - System integration services
+
+2. Service specifications are detailed in Attachment A of this agreement.
+
+3. Services will be provided at Client's premises or remotely as agreed.
+
+FINANCIAL TERMS:
+================
+
+Total service fee: $125,000 USD (excluding taxes)
+State tax (8.5%): $10,625 USD
+Total including tax: $135,625 USD
+
+Payment terms:
+- Monthly invoicing cycle
+- Payment due: 30 days from invoice date
+- Bank details: Account 9876543210, Routing 021000021
+
+KEY PERSONNEL:
+==============
+
+Provider representatives:
+Michael Davis
+Project Manager
+Phone: +1 (415) 555-0789
+Email: michael.davis@techcorp.com
+Employee ID: EMP-2024-001
+
+Client representatives:
+Dr. Robert Wilson, Ph.D.
+Head of Technology
+Phone: +1 (212) 555-0987
+Email: robert.wilson@globalent.com
+Employee ID: GE-IT-2024-015
+
+ADDITIONAL INFORMATION:
+=======================
+
+Related document references:
+- Proposal REF-2024-025 dated February 1, 2024
+- Technical Specification TECH-SPEC-2024-012
+- Security Protocol SEC-PROT-2024-008
+
+Important milestones:
+- Project kickoff: April 1, 2024
+- Mid-term review: June 15, 2024
+- Project completion: September 30, 2024
+
+Additional contact numbers:
+- Main reception: (415) 555-0100
+- Emergency support: +1 (415) 555-9999
+- Customer service: 1-800-TECH-SUP
+
+Project team members:
+- Lisa Chang (Software Engineer) - ID: EMP-2024-003, Phone: (415) 555-0234
+- David Rodriguez (System Analyst) - ID: EMP-2024-007, Phone: +1 (415) 555-0567
+- Jennifer Kim (QA Specialist) - ID: EMP-2024-012, Phone: (415) 555-0890
+
+CONTRACT NOTES:
+===============
+
+This agreement is governed by California state law and federal regulations.
+
+Any disputes will be resolved through arbitration in San Francisco County.
+
+The contract becomes effective upon signature by both parties.
+
+San Francisco, March 15, 2024
+
+_____________________        _____________________
+John Smith                   Sarah Johnson
+CEO, TechCorp Solutions      CTO, Global Enterprises
+
+---
+
+ATTACHMENT A: SERVICE SPECIFICATIONS
+====================================
+
+Detailed service descriptions:
+
+1. CONSULTING SERVICES
+   - Current IT infrastructure assessment
+   - Optimization recommendations
+   - Staff training and development
+   Duration: 60 hours
+   Rate: $200/hour
+
+2. SOFTWARE DEVELOPMENT
+   - Enterprise resource planning system
+   - Mobile application for iOS/Android
+   - API development and integration
+   Estimated effort: 300 developer hours
+   Rate: $150/hour
+
+3. TECHNICAL SUPPORT
+   - 24/7 system monitoring
+   - Incident response and resolution
+   - Regular system updates
+   Monthly retainer: $5,000
+
+TECHNICAL SUPPORT CONTACT:
+support@techcorp.com
+Support hotline: +1 (415) 555-HELP
+
+Technical lead: James Anderson
+Employee ID: EMP-2024-020
+Mobile: (415) 555-7777
+
+SECURITY CLEARANCE INFORMATION:
+===============================
+
+Authorized personnel with security access:
+- John Smith (CEO) - Clearance Level: Executive
+- Michael Davis (PM) - Clearance Level: Project
+- Lisa Chang (Dev) - Clearance Level: Technical
+
+Background check reference numbers:
+- BG-CHECK-2024-001 (John Smith)
+- BG-CHECK-2024-002 (Michael Davis)
+- BG-CHECK-2024-003 (Lisa Chang)
+
+Security contact: security@techcorp.com
+Emergency security line: +1 (415) 555-SEC1
+
+COMPLIANCE INFORMATION:
+=======================
+
+This agreement complies with:
+- SOX (Sarbanes-Oxley Act)
+- GDPR (General Data Protection Regulation)
+- HIPAA (Health Insurance Portability and Accountability Act)
+- ISO 27001 Information Security Management
+
+Compliance officer: Margaret Thompson
+Phone: +1 (415) 555-COMP
+Email: compliance@techcorp.com
+Employee ID: EMP-2024-COMP
+
+Annual compliance review scheduled for: December 1, 2024
+Next audit date: March 1, 2025
+
+Document classification: CONFIDENTIAL
+Document ID: DOC-SA-2024-001
+Version: 1.0
+Last modified: March 15, 2024

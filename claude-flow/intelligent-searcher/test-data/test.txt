@@ -1,0 +1,1 @@
+Toto je testovací text pro ověření funkčnosti AI textového vyhledávače. Podporujeme nyní mnoho formátů včetně TXT, DOCX, PDF, RTF, Excel, CSV a Markdown souborů.

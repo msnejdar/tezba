@@ -1,0 +1,10 @@
+Název,Formát,Podporován,Poznámka
+Textové soubory,TXT,Ano,Základní formát
+Microsoft Word,DOCX,Ano,Pomocí mammoth
+PDF dokumenty,PDF,Ano,Pomocí pdf-parse
+Rich Text Format,RTF,Ano,Vlastní parser
+Excel tabulky,XLSX,Ano,Pomocí xlsx balíčku
+Starší Excel,XLS,Ano,Pomocí xlsx balíčku
+CSV soubory,CSV,Ano,Nativní podpora
+Markdown,MD,Ano,S čištěním syntaxe
+Apple Pages,PAGES,Ano,Speciální converter
