@@ -27,22 +27,6 @@ const HiveMindDashboard = () => {
   });
   const [monitorCleanup, setMonitorCleanup] = useState(null);
 
-  // Load hive minds on component mount
-  useEffect(() => {
-    loadHiveMinds();
-  }, []);
-
-  // Monitor selected hive mind
-  useEffect(() => {
-    if (selectedHive) {
-      startMonitoring(selectedHive);
-    } else {
-      stopMonitoring();
-    }
-
-    return () => stopMonitoring();
-  }, [selectedHive, startMonitoring, stopMonitoring]);
-
   const loadHiveMinds = async () => {
     try {
       setLoading(true);
@@ -76,6 +60,22 @@ const HiveMindDashboard = () => {
       setMonitorCleanup(null);
     }
   }, [monitorCleanup]);
+
+  // Load hive minds on component mount
+  useEffect(() => {
+    loadHiveMinds();
+  }, []);
+
+  // Monitor selected hive mind
+  useEffect(() => {
+    if (selectedHive) {
+      startMonitoring(selectedHive);
+    } else {
+      stopMonitoring();
+    }
+
+    return () => stopMonitoring();
+  }, [selectedHive, startMonitoring, stopMonitoring]);
 
   const createHiveMind = async () => {
     try {
