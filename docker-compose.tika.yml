@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  tika:
+    image: apache/tika:2.9.0
+    ports:
+      - "9998:9998"
+    environment:
+      - JAVA_TOOL_OPTIONS=-Xms256m -Xmx1024m
+    restart: unless-stopped
+
+
