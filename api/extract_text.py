@@ -41,7 +41,8 @@ def _require_api_key(request):
     return None
 
 
-def handler(request):
+# Vercel serverless function handler
+def handler(request, context=None):
     # Handle CORS preflight request
     if request.method == 'OPTIONS':
         headers = {
@@ -101,7 +102,12 @@ def handler(request):
 
         # Try serverless Tika first for better performance
         try:
-            from .tika_serverless import extract_text_serverless
+            # Handle both local and Vercel imports
+            try:
+                from .tika_serverless import extract_text_serverless
+            except ImportError:
+                from tika_serverless import extract_text_serverless
+            
             extracted_text, metadata = extract_text_serverless(file_data, filename)
             
             return _json_response(request, {
@@ -215,7 +221,13 @@ def handler(request):
             "error": "Neplatný JSON formát požadavku"
         }, 400)
     except Exception as e:
+        # Log error for debugging
+        import traceback
+        error_details = traceback.format_exc()
+        print(f"Error in extract_text handler: {error_details}")
+        
         return _json_response(request, {
             "success": False,
-            "error": f"Neočekávaná chyba: {str(e)}"
+            "error": f"Neočekávaná chyba: {str(e)}",
+            "debug": error_details if os.environ.get('DEBUG') else None
         }, 500)
