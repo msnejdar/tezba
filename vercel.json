@@ -3,12 +3,14 @@
   "builds": [
     {
       "src": "claude-flow/intelligent-searcher/client/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "build" }
+      "use": "@vercel/static-build"
     }
   ],
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/" }
+  "routes": [
+    {
+      "src": "/[^.]+",
+      "dest": "/index.html",
+      "status": 200
+    }
   ]
 }
