@@ -41,8 +41,8 @@ def _require_api_key(request):
     return None
 
 
-# Vercel serverless function handler
-def handler(request, context=None):
+# Main handler function for Vercel
+def handler(request):
     # Handle CORS preflight request
     if request.method == 'OPTIONS':
         headers = {
@@ -231,3 +231,19 @@ def handler(request, context=None):
             "error": f"Neočekávaná chyba: {str(e)}",
             "debug": error_details if os.environ.get('DEBUG') else None
         }, 500)
+
+# Alternative entry points for Vercel
+def main(request):
+    return handler(request)
+
+# Flask-style entry point 
+from flask import Flask, request as flask_request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/api/extract_text', methods=['POST', 'OPTIONS'])
+def extract_text_flask():
+    return handler(flask_request)
+
+if __name__ == '__main__':
+    app.run(debug=True)
