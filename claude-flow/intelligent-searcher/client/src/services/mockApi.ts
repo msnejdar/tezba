@@ -1,9 +1,30 @@
 import { DocumentParser } from './documentParser';
+import { TikaApiService } from './tikaApi';
 
 // Mock API service for when backend is not available
 export const mockApi = {
   upload: async (file: File) => {
     try {
+      // Try Tika API first if available (better support for all formats)
+      if (TikaApiService.isAvailable()) {
+        console.log('Using Tika API for file processing');
+        const tikaResult = await TikaApiService.extractText(file);
+        
+        if (tikaResult.success && tikaResult.extractedText) {
+          return {
+            success: true,
+            fileContent: tikaResult.extractedText,
+            fileName: file.name,
+            fileSize: file.size,
+            metadata: tikaResult.metadata
+          };
+        } else {
+          console.warn('Tika API failed, falling back to DocumentParser:', tikaResult.error);
+        }
+      }
+      
+      // Fallback to DocumentParser for basic support
+      console.log('Using DocumentParser for file processing');
       const content = await DocumentParser.parseFile(file);
       return {
         success: true,
