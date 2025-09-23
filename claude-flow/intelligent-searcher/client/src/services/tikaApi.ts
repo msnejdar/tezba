@@ -33,10 +33,18 @@ export class TikaApiService {
         })
       });
 
+      // Check if response is JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const textResponse = await response.text();
+        console.error('Non-JSON response:', textResponse);
+        throw new Error(`Server vrátil neplatnou odpověď. Status: ${response.status}`);
+      }
+      
       const result = await response.json();
       
       if (!response.ok) {
-        throw new Error(result.error || 'API request failed');
+        throw new Error(result.error || `API request failed with status ${response.status}`);
       }
       
       return result;
