@@ -4,19 +4,19 @@
   "framework": null,
   "functions": {
     "api/extract_text.py": {
-      "runtime": "python3.11"
+      "runtime": "python3.9"
     },
     "api/claude_flow_hive.py": {
-      "runtime": "python3.11"
+      "runtime": "python3.9"
     },
     "api/tika_serverless.py": {
-      "runtime": "python3.11"
+      "runtime": "python3.9"
     },
     "api/document_processor.py": {
-      "runtime": "python3.11"
+      "runtime": "python3.9"
     },
     "api/health.py": {
-      "runtime": "python3.11"
+      "runtime": "python3.9"
     }
   },
   "rewrites": [
