@@ -4,7 +4,6 @@ import { FileUploadPanel } from './components/FileUploadPanel';
 import { SearchPanel } from './components/SearchPanel';
 import { DocumentViewer } from './components/DocumentViewer';
 import { Header } from './components/Header';
-import HiveMindDashboard from './components/HiveMindDashboard';
 import './styles/App.css';
 
 interface UploadedFile {
@@ -27,8 +26,6 @@ function App() {
   const [currentQuery, setCurrentQuery] = useState<string>('');
   const [selectedResult, setSelectedResult] = useState<SearchResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [showHiveMind, setShowHiveMind] = useState(false);
-
   const handleFileUpload = useCallback((file: UploadedFile) => {
     setUploadedFile(file);
     setSearchResults([]);
@@ -53,23 +50,6 @@ function App() {
     setSelectedResult(null);
   }, []);
 
-  if (showHiveMind) {
-    return (
-      <div>
-        <div style={{padding: '1rem', background: '#f0f0f0', borderBottom: '1px solid #ddd'}}>
-          <button 
-            onClick={() => setShowHiveMind(false)}
-            style={{padding: '0.5rem 1rem', marginRight: '1rem', borderRadius: '4px', border: '1px solid #ccc', background: 'white'}}
-          >
-            ← Back to Document Processor
-          </button>
-          <span style={{color: '#666'}}>Claude Flow Hive Mind Dashboard</span>
-        </div>
-        <HiveMindDashboard />
-      </div>
-    );
-  }
-
   return (
     <SearchProvider>
       <div className="app">
@@ -77,26 +57,6 @@ function App() {
           onClearSession={handleClearSession}
           uploadedFile={uploadedFile}
         />
-        
-        <div className="app-nav" style={{padding: '1rem', background: '#f8f9fa', borderBottom: '1px solid #dee2e6'}}>
-          <button 
-            onClick={() => setShowHiveMind(true)}
-            className="hive-mind-button"
-            style={{
-              padding: '0.75rem 1.5rem',
-              background: 'linear-gradient(45deg, #667eea, #764ba2)',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontWeight: '500',
-              fontSize: '0.9rem',
-              transition: 'all 0.3s ease'
-            }}
-          >
-            🧠 Open Hive Mind Dashboard
-          </button>
-        </div>
         
         <main className="app-main">
           {!uploadedFile ? (
