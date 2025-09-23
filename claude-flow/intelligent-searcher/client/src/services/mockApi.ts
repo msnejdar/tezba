@@ -1,11 +1,10 @@
-import { DocumentParser } from './documentParser';
 import { TikaApiService } from './tikaApi';
 
 // Mock API service for when backend is not available
 export const mockApi = {
   upload: async (file: File) => {
     try {
-      // Try Tika API first if available (better support for all formats)
+      // Use only Tika API for file processing
       if (TikaApiService.isAvailable()) {
         console.log('Using Tika API for file processing');
         const tikaResult = await TikaApiService.extractText(file);
@@ -19,19 +18,21 @@ export const mockApi = {
             metadata: tikaResult.metadata
           };
         } else {
-          console.warn('Tika API failed, falling back to DocumentParser:', tikaResult.error);
+          throw new Error(tikaResult.error || 'Apache Tika nedokázal zpracovat soubor');
         }
+      } else {
+        // Tika API is not available
+        throw new Error(`Apache Tika služba není dostupná. 
+
+Pro zpracování dokumentů je potřeba Apache Tika, která podporuje všechny formáty souborů včetně .pages, .docx, .pdf, .xlsx a dalších.
+
+Možná řešení:
+• Zkuste aplikaci znovu za chvíli
+• Zkontrolujte internetové připojení
+• Exportujte soubor do textového formátu (.txt)
+
+Podporované formáty: .txt, .docx, .pdf, .pages, .xlsx, .pptx, .odt, .rtf a 1000+ dalších.`);
       }
-      
-      // Fallback to DocumentParser for basic support
-      console.log('Using DocumentParser for file processing');
-      const content = await DocumentParser.parseFile(file);
-      return {
-        success: true,
-        fileContent: content,
-        fileName: file.name,
-        fileSize: file.size
-      };
     } catch (error) {
       console.error('Upload error:', error);
       throw error;
