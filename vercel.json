@@ -1,6 +1,5 @@
 {
-  "version": 2,
-  "installCommand": "cd claude-flow/intelligent-searcher/client && npm install",
-  "buildCommand": "cd claude-flow/intelligent-searcher/client && npm run build",
-  "outputDirectory": "claude-flow/intelligent-searcher/client/build"
+  "buildCommand": "npm run build",
+  "outputDirectory": "claude-flow/intelligent-searcher/client/build",
+  "framework": null
 }
