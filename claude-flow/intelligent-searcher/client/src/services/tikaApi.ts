@@ -22,7 +22,7 @@ export class TikaApiService {
       const fileData = await this.fileToBase64(file);
       
       // Call Tika API
-      const response = await fetch('/api/extract-text', {
+      const response = await fetch('/api/extract_text', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
