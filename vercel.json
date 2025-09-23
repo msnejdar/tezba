@@ -1,13 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "cd claude-flow/intelligent-searcher/client && npm install && npm run build",
-  "outputDirectory": "claude-flow/intelligent-searcher/client/build",
-  "framework": "create-react-app",
-  "routes": [
-    {
-      "src": "/[^.]+",
-      "dest": "/",
-      "status": 200
-    }
-  ]
+  "installCommand": "cd claude-flow/intelligent-searcher/client && npm install",
+  "buildCommand": "cd claude-flow/intelligent-searcher/client && npm run build",
+  "outputDirectory": "claude-flow/intelligent-searcher/client/build"
 }
