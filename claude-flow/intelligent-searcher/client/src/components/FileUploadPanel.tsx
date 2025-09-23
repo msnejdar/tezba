@@ -67,11 +67,6 @@ export function FileUploadPanel({ onFileUpload }: FileUploadPanelProps) {
         text = result.fileContent;
       }
       
-      // Fallback pro .txt soubory
-      if (!text && file.name.toLowerCase().endsWith('.txt')) {
-        text = await file.text();
-      }
-      
       if (!text) {
         throw new Error('Nepodařilo se načíst obsah souboru');
       }

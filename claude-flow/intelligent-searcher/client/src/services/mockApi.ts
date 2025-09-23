@@ -1,19 +1,20 @@
+import { DocumentParser } from './documentParser';
+
 // Mock API service for when backend is not available
 export const mockApi = {
   upload: async (file: File) => {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const content = e.target?.result as string;
-        resolve({
-          success: true,
-          fileContent: content,
-          fileName: file.name,
-          fileSize: file.size
-        });
+    try {
+      const content = await DocumentParser.parseFile(file);
+      return {
+        success: true,
+        fileContent: content,
+        fileName: file.name,
+        fileSize: file.size
       };
-      reader.readAsText(file);
-    });
+    } catch (error) {
+      console.error('Upload error:', error);
+      throw error;
+    }
   },
 
   search: async (query: string, fileContent: string) => {
