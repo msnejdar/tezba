@@ -3,10 +3,30 @@
   "outputDirectory": "claude-flow/intelligent-searcher/client/build",
   "framework": null,
   "functions": {
-    "api/*.py": {
-      "runtime": "python3.11",
-      "memory": 1024,
-      "maxDuration": 10
+    "api/extract_text.py": {
+      "runtime": "python3.11"
+    },
+    "api/claude_flow_hive.py": {
+      "runtime": "python3.11"
+    },
+    "api/tika_serverless.py": {
+      "runtime": "python3.11"
+    },
+    "api/document_processor.py": {
+      "runtime": "python3.11"
+    },
+    "api/health.py": {
+      "runtime": "python3.11"
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }

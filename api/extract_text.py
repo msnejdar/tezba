@@ -3,6 +3,9 @@ import base64
 import os
 import pathlib
 import requests
+import tempfile
+import subprocess
+from pathlib import Path
 
 
 def _cors_origin(request):
@@ -96,23 +99,37 @@ def handler(request):
                 "metadata": {"format": "text/plain"}
             })
 
-        # Use remote Apache Tika server for all other formats
-        tika_url = os.environ.get('TIKA_SERVER_URL')
-        if not tika_url:
-            # Try local config file fallback
-            try:
-                config_path = pathlib.Path(__file__).parent / 'tika_config.json'
-                if config_path.exists():
-                    with open(config_path, 'r', encoding='utf-8') as f:
-                        cfg = json.load(f)
-                        tika_url = cfg.get('serverUrl')
-            except Exception:
-                tika_url = None
-        if not tika_url:
+        # Try serverless Tika first for better performance
+        try:
+            from .tika_serverless import extract_text_serverless
+            extracted_text, metadata = extract_text_serverless(file_data, filename)
+            
             return _json_response(request, {
-                "success": False,
-                "error": "Nenastaven TIKA_SERVER_URL a chybí i api/tika_config.json."
-            }, 500)
+                "success": True,
+                "extractedText": extracted_text,
+                "filename": filename,
+                "metadata": metadata
+            })
+            
+        except Exception as serverless_error:
+            # Fallback to remote Tika server if serverless fails
+            tika_url = os.environ.get('TIKA_SERVER_URL')
+            if not tika_url:
+                # Try local config file fallback
+                try:
+                    config_path = pathlib.Path(__file__).parent / 'tika_config.json'
+                    if config_path.exists():
+                        with open(config_path, 'r', encoding='utf-8') as f:
+                            cfg = json.load(f)
+                            tika_url = cfg.get('serverUrl')
+                except Exception:
+                    tika_url = None
+            
+            if not tika_url:
+                return _json_response(request, {
+                    "success": False,
+                    "error": f"Serverless extraction failed: {str(serverless_error)}. No Tika server configured."
+                }, 500)
 
         if tika_url.endswith('/'):
             tika_url = tika_url[:-1]
