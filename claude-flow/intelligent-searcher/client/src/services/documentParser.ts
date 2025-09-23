@@ -1,5 +1,6 @@
 import * as mammoth from 'mammoth';
 import * as XLSX from 'xlsx';
+import JSZip from 'jszip';
 
 // Document parser service for various file formats
 export class DocumentParser {
@@ -90,6 +91,77 @@ export class DocumentParser {
     }
   }
 
+  // Parse Apple Pages files (basic extraction)
+  static async parsePages(file: File): Promise<string> {
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const zip = await JSZip.loadAsync(arrayBuffer);
+      
+      // Pages files contain a preview.pdf usually
+      let extractedText = '';
+      
+      // Try to extract text from preview.pdf if available
+      const previewPdf = zip.file('preview.pdf');
+      if (previewPdf) {
+        // For now, we can't easily extract text from PDF in browser
+        extractedText += '[Soubor Pages obsahuje PDF náhled - plný text není dostupný]\n\n';
+      }
+      
+      // Try to find text in index.xml or other XML files
+      const indexXml = zip.file('index.xml');
+      if (indexXml) {
+        const xmlContent = await indexXml.async('string');
+        // Extract text content from XML (basic approach)
+        const textMatches = xmlContent.match(/>([^<]+)</g);
+        if (textMatches) {
+          const xmlText = textMatches
+            .map(match => match.slice(1, -1).trim())
+            .filter(text => text.length > 2 && !text.match(/^[0-9.]+$/))
+            .join(' ');
+          extractedText += xmlText;
+        }
+      }
+      
+      // If no text found, try other XML files
+      if (!extractedText.trim()) {
+        const xmlFiles = Object.keys(zip.files).filter(name => name.endsWith('.xml'));
+        for (const xmlFile of xmlFiles) {
+          try {
+            const file = zip.file(xmlFile);
+            if (file) {
+              const content = await file.async('string');
+              const textMatches = content.match(/>([^<]+)</g);
+              if (textMatches) {
+                const text = textMatches
+                  .map(match => match.slice(1, -1).trim())
+                  .filter(text => text.length > 3)
+                  .join(' ');
+                if (text.length > extractedText.length) {
+                  extractedText = text;
+                }
+              }
+            }
+          } catch (err) {
+            // Ignore errors for individual files
+            continue;
+          }
+        }
+      }
+      
+      if (!extractedText.trim()) {
+        throw new Error('Nepodařilo se extrahovat text z Pages souboru. Zkuste soubor exportovat jako DOCX nebo TXT.');
+      }
+      
+      return extractedText;
+    } catch (error) {
+      console.error('Error parsing Pages:', error);
+      if (error instanceof Error && error.message.includes('Nepodařilo se extrahovat')) {
+        throw error;
+      }
+      throw new Error('Nepodařilo se načíst Pages soubor. Zkuste soubor exportovat jako DOCX nebo TXT.');
+    }
+  }
+
   // Main parsing function
   static async parseFile(file: File): Promise<string> {
     const fileName = file.name.toLowerCase();
@@ -110,8 +182,7 @@ export class DocumentParser {
       } else if (fileName.endsWith('.txt')) {
         return await file.text();
       } else if (fileName.endsWith('.pages')) {
-        // Pages format is proprietary Apple format
-        throw new Error('Formát .pages vyžaduje konverzi na jiný formát (např. DOCX nebo TXT)');
+        return await this.parsePages(file);
       } else {
         // Try to read as text for unknown formats
         return await file.text();
