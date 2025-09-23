@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import React, { createContext, useContext, useReducer, ReactNode, useEffect, useState } from 'react';
+import { mockApi, isApiAvailable } from '../services/mockApi';
 
 interface SearchResult {
   match: string;
@@ -113,6 +114,11 @@ const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
 export function SearchProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(searchReducer, initialState);
+  const [useBackend, setUseBackend] = useState(false);
+
+  useEffect(() => {
+    isApiAvailable().then(setUseBackend);
+  }, []);
 
   const uploadFile = (file: UploadedFile) => {
     dispatch({ type: 'SET_UPLOADED_FILE', payload: file });
@@ -125,26 +131,37 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'ADD_TO_HISTORY', payload: query });
 
     try {
-      const response = await fetch('/api/search', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({ query: query.trim() }),
-      });
+      let results = [];
+      
+      if (useBackend) {
+        // Use real API if available
+        const response = await fetch('/api/search', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({ query: query.trim() }),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data.error || 'Chyba při vyhledávání');
+        if (!response.ok) {
+          throw new Error(data.error || 'Chyba při vyhledávání');
+        }
+        
+        results = data.results || [];
+      } else {
+        // Use mock API for Vercel deployment
+        const result = await mockApi.search(query.trim(), state.uploadedFile.content);
+        results = result.results || [];
       }
 
       dispatch({
         type: 'SET_SEARCH_RESULTS',
         payload: {
           query: query.trim(),
-          results: data.results || [],
+          results: results,
         },
       });
 
@@ -165,10 +182,14 @@ export function SearchProvider({ children }: { children: ReactNode }) {
 
   const clearSession = async () => {
     try {
-      await fetch('/api/session/clear', {
-        method: 'DELETE',
-        credentials: 'include',
-      });
+      if (useBackend) {
+        await fetch('/api/session/clear', {
+          method: 'DELETE',
+          credentials: 'include',
+        });
+      } else {
+        await mockApi.clearSession();
+      }
     } catch (error) {
       console.error('Error clearing session:', error);
     }

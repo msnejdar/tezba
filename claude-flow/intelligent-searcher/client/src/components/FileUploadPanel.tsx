@@ -1,4 +1,5 @@
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
+import { mockApi, isApiAvailable } from '../services/mockApi';
 
 interface UploadedFile {
   name: string;
@@ -14,7 +15,12 @@ export function FileUploadPanel({ onFileUpload }: FileUploadPanelProps) {
   const [isDragOver, setIsDragOver] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [useBackend, setUseBackend] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    isApiAvailable().then(setUseBackend);
+  }, []);
 
   const handleFileUpload = useCallback(async (file: File) => {
     const allowedExtensions = ['.txt', '.pages', '.docx', '.pdf', '.rtf', '.xlsx', '.xls', '.csv', '.md', '.markdown'];
@@ -35,31 +41,39 @@ export function FileUploadPanel({ onFileUpload }: FileUploadPanelProps) {
     setError(null);
 
     try {
-      const formData = new FormData();
-      formData.append('textFile', file);
-
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        credentials: 'include',
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Chyba při nahrávání souboru');
-      }
-
-      // Server zpracuje všechny typy souborů a pošle nám extrahovaný text
-      let text = data.extractedText || '';
+      let text = '';
       
-      // Fallback pro .txt soubory - pokud server nepošle text, čteme lokálně
+      if (useBackend) {
+        // Use real API if available
+        const formData = new FormData();
+        formData.append('textFile', file);
+
+        const response = await fetch('/api/upload', {
+          method: 'POST',
+          credentials: 'include',
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Chyba při nahrávání souboru');
+        }
+
+        text = data.extractedText || '';
+      } else {
+        // Use mock API for Vercel deployment
+        const result = await mockApi.upload(file) as any;
+        text = result.fileContent;
+      }
+      
+      // Fallback pro .txt soubory
       if (!text && file.name.toLowerCase().endsWith('.txt')) {
         text = await file.text();
       }
       
       if (!text) {
-        throw new Error('Server nevrátil žádný text ze souboru');
+        throw new Error('Nepodařilo se načíst obsah souboru');
       }
       
       const uploadedFile: UploadedFile = {
@@ -76,7 +90,7 @@ export function FileUploadPanel({ onFileUpload }: FileUploadPanelProps) {
     } finally {
       setIsUploading(false);
     }
-  }, [onFileUpload]);
+  }, [onFileUpload, useBackend]);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
